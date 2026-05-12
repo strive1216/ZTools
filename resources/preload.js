@@ -120,13 +120,9 @@ const lazyMainPushQuery = lazyListen('main-push-query', async (event, { queryDat
     let allResults = []
     if (mainPushCallback) {
       try {
-        let results = mainPushCallback.callback(queryData)
-        // MainPush结果可能是一个 Promise，需要等待结果
-        if (results && typeof results.then === 'function') {
-          results = await results
-        }
+        let results = await mainPushCallback.callback(queryData)
         // MainPush结果可能是一个对象，需要提取 data 字段
-        if (results && Array.isArray(results.data)) {
+        if (results && results.type === 'list' && Array.isArray(results.data)) {
           results = results.data
         }
         if (Array.isArray(results) && results.length > 0) {
