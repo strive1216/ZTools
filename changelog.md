@@ -1,32 +1,43 @@
-# 2.4.1
+# 2.5.0
 
 ## 新功能 (Feat)
 
-- 新增 Linux 平台支持（应用启动、系统指令、窗口激活、arm64 构建）（PR [#398](../../pull/398)，感谢 [@YanqingZhang](https://github.com/YanqingZhang) 的贡献 🎉）
-- 支持插件内获取及订阅主题相关信息（PR [#415](../../pull/415)，感谢 [@Particaly](https://github.com/Particaly) 的贡献 🎉）
-- 新增前往文件夹功能
+- 超级面板支持剪贴板文件/文件夹的系统指令，并新增 Windows 文件管理器「复制路径」「在终端打开」能力
+- 指令别名扩展到系统应用和窗口指令（PR [#452](../../pull/452)，感谢 [@Particaly](https://github.com/Particaly) 的贡献 🎉）
+- Windows 插件分离窗口支持独立任务栏图标（PR [#437](../../pull/437)，感谢 [@1284604307](https://github.com/1284604307) 的贡献 🎉）
+- 支持内部 API 授权，并修复授权配置保存问题（PR [#482](../../pull/482)，感谢 [@Particaly](https://github.com/Particaly) 的贡献 🎉）
+- 插件卸载时可选择保留用户数据，并统一插件 confirm 处理逻辑和类型定义（PR [#491](../../pull/491)，感谢 [@guopenghui](https://github.com/guopenghui) 的贡献 🎉）
+- 设置插件新增匹配指令详情页，便于查看和配置匹配指令（PR [#494](../../pull/494)，感谢 [@guopenghui](https://github.com/guopenghui) 的贡献 🎉）
+- 系统插件新增 Windows「前往文件夹」指令，并处理 Windows 路径非法字符（PR [#496](../../pull/496)，感谢 [@guopenghui](https://github.com/guopenghui) 的贡献 🎉）
+- 网页快开支持普通网站、上传图标，并优化网页快开管理界面（PR [#505](../../pull/505)，感谢 [@guopenghui](https://github.com/guopenghui) 的贡献 🎉）
+- 下载流程增加进度显示
 
 ## 修复 (Fix)
 
-- 修复 Windows 插件目录被占用导致无法删除的问题（PR [#419](../../pull/419)，感谢 [@yg2224](https://github.com/yg2224) 的贡献 🎉）
-- 修复开发中插件热更新重载页面时错误地在浏览器打开页面的问题（PR [#418](../../pull/418)，感谢 [@Particaly](https://github.com/Particaly) 的贡献 🎉）
-- 修复首次启动托盘图标不显示的问题
-- 修复关闭插件视图时未同步关闭所有由该插件创建的独立窗口的问题
-- 修复插件升级流程，支持覆盖安装并保留插件数据
-- 修复插件创建的子窗口存储数据无命名空间前缀的问题
-- 修复 macOS 下双击 Option 键无法作为唤醒快捷键的问题
-- 修复某些情况下出现窗口叠层问题
-- 修复 node 加载路径错误导致 Windows / macOS 报错的问题
-- 修复搜索结果中应用别名与主名称重复显示的问题
-- 修复多屏场景下窗口显示错误问题
+- 修复超级面板剪贴板识别问题，改用序号机制避免取到旧内容（PR [#431](../../pull/431)，感谢 [@Particaly](https://github.com/Particaly) 的贡献 🎉）
+- 修复 Linux 启动含参数应用路径的问题（PR [#454](../../pull/454)，感谢 [@strive1216](https://github.com/strive1216) 的贡献 🎉）
+- 修复系统文件对话框关闭后主窗口自动显示的问题（PR [#474](../../pull/474)，感谢 [@Flinglin](https://github.com/Flinglin) 的贡献 🎉）
+- 修复系统文件窗口导入错误（PR [#477](../../pull/477)，感谢 [@Flinglin](https://github.com/Flinglin) 的贡献 🎉）
+- 修复应用内更新后 Windows 注册表版本信息未同步的问题（PR [#432](../../pull/432)，感谢 [@EightOrange](https://github.com/EightOrange) 的贡献 🎉）
+- 修复 mainPushCallback 返回异步结果或对象结果时无法正确处理的问题（PR [#487](../../pull/487)，感谢 [@guopenghui](https://github.com/guopenghui) 的贡献 🎉）
+- 修复 `onPluginOut(isKill)` 无法监听的问题
+- 修复独立插件窗口重入时未前置的问题（PR [#504](../../pull/504)，感谢 [@kuraxii](https://github.com/kuraxii) 的贡献 🎉）
+- 修复拖拽文件进入主窗口时窗口被 blur 隐藏的问题（PR [#506](../../pull/506)，感谢 [@guopenghui](https://github.com/guopenghui) 的贡献 🎉）
+- 修复 macOS 唤醒主窗口时原应用丢失焦点的问题
+- 修复全局快捷键取词时机，等待按键释放并按需复制选中文本（PR [#508](../../pull/508)，感谢 [@Particaly](https://github.com/Particaly) 的贡献 🎉）
+- 修复网页快开快捷键触发和已删除记录清理问题
 
 ## 优化 (Optimize)
 
-- 图标获取支持队列，提升并发获取性能
+- 内置设置插件返回后重置跳转到通用设置
+- 优化插件市场、插件详情、指令列表、快捷键和网页快开等设置界面交互
+- 增加 Web Search、Windows Explorer、系统插件前往文件夹、插件卸载清理等测试覆盖
 
 ## 重构 (Refactor)
 
-无
+- 抽离匹配指令详情弹窗 composable
+- 抽取网页快开类型定义
+- 新增全局输入管理器，统一管理 `uiohook` 的启动、释放和多模块监听
 
 ## 其他 (Chore)
 
