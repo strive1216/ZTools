@@ -1370,7 +1370,7 @@ export const useCommandDataStore = defineStore('commandData', () => {
         return windowInfo.app === appPattern
       })
       const classNameMatches = windowCmd.match.className?.some(
-        (classNamePattern) => classNamePattern === windowInfo.className
+        (classNamePattern) => classNamePattern === (windowInfo.className || '')
       )
       if (appMatches && (!windowCmd.match.className || classNameMatches)) {
         return true
